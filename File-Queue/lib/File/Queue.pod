@@ -20,7 +20,7 @@ File::Queue - Persistent FIFO queue implemented in pure perl!
     my $elem2 = $q->deq();  
 
     # empty the queue
-    $deq->reset();
+    $q->reset();
 
 =head1 DESCRIPTION
 

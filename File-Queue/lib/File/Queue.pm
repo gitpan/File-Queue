@@ -5,9 +5,7 @@ use IO::File;
 use Fcntl 'SEEK_END', 'SEEK_SET', 'O_CREAT', 'O_RDWR';
 use Carp qw(carp croak);
 
-use version;
-
-our $VERSION = qv('1.0');
+our $VERSION = '1.01';
 
 sub new
 {
@@ -63,21 +61,21 @@ sub new
 
 sub enq
 {
-  my $self = shift;
+  my ($self, $element) = @_;
 
   $self->{queue}->sysseek(0, SEEK_END); 
 
-  if(ref $_[0])
+  if(ref $element)
   {
     croak 'Cannot handle references';
   }
 
-  if($_[0] =~ s/$self->{seperator}//g)
+  if($element =~ s/$self->{seperator}//g)
   {
-    carp "Removed illegal seperator(s) from $_[0]";
+    carp "Removed illegal seperator(s) from $element";
   }
 
-  $self->{queue}->syswrite("$_[0]$self->{seperator}") or croak "Could not syswrite to queue: $!";  
+  $self->{queue}->syswrite("$element$self->{seperator}") or croak "Could not syswrite to queue: $!";  
 }
 
 sub deq

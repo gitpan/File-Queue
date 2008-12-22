@@ -6,7 +6,7 @@ use File::Queue;
 
 use Test::Simple tests => 3;
 
-my $queue_file = "test_queue_$$";
+my $queue_file = "t/rw/test_queue_$$";
 
 my $struct =
 [
